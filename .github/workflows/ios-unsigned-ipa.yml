@@ -12,19 +12,22 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-26
     env:
       PROJECT: FlowzaCombined/FlowzaMobile/FlowzaMobile.csproj
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select Xcode 26.0 (required by .NET iOS 26.0)
+      - name: Select newest Xcode 26.x
         run: |
           ls -d /Applications/Xcode*.app
-          if [ -d /Applications/Xcode_26.0.app ]; then
-            sudo xcode-select -s /Applications/Xcode_26.0.app
-          fi
+          XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE"
           xcodebuild -version
+          xcodebuild -showsdks
+          xcrun --sdk macosx --show-sdk-path
+          xcrun -f actool
 
       - uses: actions/setup-dotnet@v4
         with:
