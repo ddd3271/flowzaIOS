@@ -32,6 +32,7 @@ jobs:
       - name: Build (unsigned)
         run: |
           dotnet build "$PROJECT" -f net10.0-ios -c Release \
+            -p:TargetFrameworks=net10.0-ios \
             -p:RuntimeIdentifier=ios-arm64 \
             -p:EnableCodeSigning=false \
             -p:CodesignRequireProvisioningProfile=false \
