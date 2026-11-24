@@ -18,17 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select Xcode
+      - name: Select Xcode 26.0
         run: |
           echo "Installierte Xcode-Versionen:"
           ls -d /Applications/Xcode*.app
-          XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          XCODE=$(ls -d /Applications/Xcode_26.0*.app | sort -V | tail -1)
           echo "Using $XCODE"
           sudo xcode-select -s "$XCODE"
           sudo xcodebuild -license accept || true
           sudo xcodebuild -runFirstLaunch || true
           xcodebuild -version
           xcodebuild -showsdks
+
+      - name: Install matching iOS runtime
+        run: |
+          sudo xcodebuild -downloadPlatform iOS -buildVersion 26.0 || sudo xcodebuild -downloadPlatform iOS
           xcrun simctl list runtimes
           echo "actool: $(xcrun -f actool)"
 
@@ -38,7 +42,6 @@ jobs:
 
       - name: Install MAUI iOS workload
         run: |
-          dotnet workload update
           dotnet workload install maui-ios
           dotnet workload list
 
