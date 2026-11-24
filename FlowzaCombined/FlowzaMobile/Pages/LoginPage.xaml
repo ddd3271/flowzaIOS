@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowzaMobile.Pages.LoginPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- Flowza-own glow -->
+        <BoxView Color="{StaticResource Accent}" Opacity="0.18" CornerRadius="400"
+                 WidthRequest="520" HeightRequest="520" HorizontalOptions="Center" VerticalOptions="Start"
+                 TranslationY="-180" TranslationX="60" />
+
+        <ScrollView VerticalOptions="Center">
+            <Border Style="{StaticResource Card}" Margin="24" MaximumWidthRequest="420" HorizontalOptions="Center">
+                <VerticalStackLayout Spacing="16">
+
+                    <HorizontalStackLayout Spacing="12">
+                        <Border BackgroundColor="{StaticResource Accent}" StrokeShape="RoundRectangle 12"
+                                WidthRequest="40" HeightRequest="40" Padding="0">
+                            <Label Text="F" TextColor="White" FontSize="20" FontAttributes="Bold"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                        <VerticalStackLayout Spacing="0">
+                            <Label Text="Flowza" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                            <Label x:Name="VersionLabel" Text="Mobile" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <BoxView HeightRequest="1" Color="{StaticResource CardBorder}" />
+
+                    <Label x:Name="MaintenanceBanner" IsVisible="False" TextColor="#FFB4B4"
+                           BackgroundColor="#2A1818" Padding="12" FontSize="13" />
+
+                    <!-- tabs: Log in | Register -->
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Button x:Name="LoginTab" Grid.Column="0" Text="Log in" Style="{StaticResource PillButton}" HeightRequest="44" Clicked="OnLoginTab" />
+                        <Button x:Name="RegisterTab" Grid.Column="1" Text="Register" Style="{StaticResource GhostButton}" HeightRequest="44" Clicked="OnRegisterTab" />
+                    </Grid>
+
+                    <Entry x:Name="UsernameEntry" Placeholder="Username" Keyboard="Plain" ReturnType="Next" MaxLength="20" />
+                    <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" ReturnType="Done" MaxLength="100" Completed="OnEntryCompleted" />
+                    <Entry x:Name="ConfirmEntry" Placeholder="Repeat password" IsPassword="True" IsVisible="False" ReturnType="Done" MaxLength="100" Completed="OnEntryCompleted" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <CheckBox x:Name="RememberCheck" IsChecked="True" Color="{StaticResource Accent}" VerticalOptions="Center" />
+                        <Label Text="Remember me" TextColor="{StaticResource TextPrimary}" FontSize="14" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="HintLabel" TextColor="{StaticResource TextMuted}" FontSize="12" />
+
+                    <Button x:Name="SubmitButton" Text="Log in" Style="{StaticResource PillButton}" Clicked="OnSubmitClicked" />
+
+                    <ActivityIndicator x:Name="Spinner" IsRunning="False" IsVisible="False" Color="{StaticResource Accent}" />
+
+                    <Label x:Name="ErrorLabel" TextColor="#FF8C8C" FontSize="13" IsVisible="False" />
+
+                </VerticalStackLayout>
+            </Border>
+        </ScrollView>
+    </Grid>
+</ContentPage>

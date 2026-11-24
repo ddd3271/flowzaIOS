@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:FlowzaMobile.Models"
+             x:Class="FlowzaMobile.Pages.HomePage"
+             Title="🎵 Flowza">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <Label Grid.Row="0" x:Name="AnnouncementLabel" IsVisible="False" Margin="16,12,16,0"
+               Padding="12" BackgroundColor="{StaticResource FieldBg}" TextColor="{StaticResource TextPrimary}"
+               FontSize="13" />
+
+        <Border Grid.Row="1" x:Name="ConnectCard" IsVisible="False" Style="{StaticResource Card}" Margin="16,12,16,0">
+            <VerticalStackLayout Spacing="12">
+                <Label x:Name="ConnectLabel" FontSize="13" TextColor="{StaticResource TextMuted}" />
+                <Button x:Name="ConnectButton" Text="🎧 Connect Spotify" Style="{StaticResource PillButton}" Clicked="OnConnectClicked" />
+            </VerticalStackLayout>
+        </Border>
+
+        <RefreshView Grid.Row="2" x:Name="Refresher" Refreshing="OnRefreshing">
+            <CollectionView x:Name="PlaylistList" Margin="16,12" SelectionMode="Single" SelectionChanged="OnPlaylistSelected">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="8">
+                        <Label Text="🎧" FontSize="40" HorizontalOptions="Center" />
+                        <Label Text="Pull down to sync your Spotify playlists" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:PlaylistInfo">
+                        <Border Style="{StaticResource Card}" Margin="0,6" Padding="16,14">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                                    <Label Text="{Binding CountText}" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="›" FontSize="22" TextColor="{StaticResource TextMuted}" VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

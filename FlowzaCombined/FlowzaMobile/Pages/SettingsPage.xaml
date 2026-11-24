@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlowzaMobile.Pages.SettingsPage"
+             Title="⚙️ Settings">
+
+    <ScrollView>
+        <VerticalStackLayout Margin="16" Spacing="20">
+
+            <!-- 🎨 LOOK -->
+            <Label Text="🎨 LOOK" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="16">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="🌈 Ambient glow" FontSize="14" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
+                        <Switch x:Name="GlowSwitch" Grid.Column="1" Toggled="OnSettingToggled" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource CardBorder}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="🌠 Shooting stars" FontSize="14" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
+                        <Switch x:Name="StarsSwitch" Grid.Column="1" Toggled="OnSettingToggled" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource CardBorder}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="🎨 Colours from the cover" FontSize="14" TextColor="{StaticResource TextPrimary}" VerticalOptions="Center" />
+                        <Switch x:Name="CoverSwitch" Grid.Column="1" Toggled="OnSettingToggled" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 🔑 FLOWZA ACCOUNT -->
+            <Label Text="🔑 FLOWZA ACCOUNT" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" Margin="0,8,0,0" />
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="14">
+                    <HorizontalStackLayout Spacing="12">
+                        <Border StrokeShape="RoundRectangle 20" WidthRequest="40" HeightRequest="40" Padding="0" Stroke="Transparent">
+                            <Image x:Name="DiscordAvatarImage" Aspect="AspectFill" />
+                        </Border>
+                        <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+                            <Label x:Name="AccountNameLabel" Text="Not logged in" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                            <Label x:Name="AccountSubLabel" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                    <Button x:Name="LogoutButton" Text="🚪 Log out of Flowza" Style="{StaticResource GhostButton}" Clicked="OnLogoutClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- 👤 ACCOUNTS -->
+            <Label Text="👤 ACCOUNTS" FontSize="13" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" Margin="0,8,0,0" />
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="14">
+                    <HorizontalStackLayout Spacing="12">
+                        <Border StrokeShape="RoundRectangle 20" WidthRequest="40" HeightRequest="40" Padding="0" Stroke="Transparent">
+                            <Image x:Name="AvatarImage" Aspect="AspectFill" />
+                        </Border>
+                        <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+                            <Label x:Name="SpotifyNameLabel" Text="🎧 Spotify" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                            <Label x:Name="SpotifyStatusLabel" Text="Not connected" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                    <Entry x:Name="ClientIdEntry" Placeholder="Spotify Client ID" MaxLength="64" Completed="OnClientIdCompleted" />
+                    <Button x:Name="SaveClientIdButton" Text="💾 Save Client ID" Style="{StaticResource GhostButton}" Clicked="OnSaveClientIdClicked" />
+                    <Button x:Name="ConnectButton" Text="🎧 Connect Spotify" Style="{StaticResource GhostButton}" Clicked="OnConnectClicked" />
+                    <Button x:Name="SyncButton" Text="🔄 Sync Spotify playlists now" Style="{StaticResource GhostButton}" Clicked="OnSyncClicked" />
+                    <Button x:Name="SignOutButton" Text="🚪 Disconnect Spotify" Style="{StaticResource GhostButton}" Clicked="OnSignOutClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- footer -->
+            <Label x:Name="FooterLabel" Text="🎧 Flowza · Made by Crexx" FontSize="12" Opacity="0.4"
+                   HorizontalOptions="Center" Margin="0,20,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

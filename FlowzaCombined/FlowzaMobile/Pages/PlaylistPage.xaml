@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:FlowzaMobile.Models"
+             x:Class="FlowzaMobile.Pages.PlaylistPage"
+             Title="{Binding Title}">
+
+    <Grid RowDefinitions="Auto,*">
+        <Label Grid.Row="0" Text="Tap a song to open and play it in Spotify" Margin="16,12,16,0"
+               FontSize="12" TextColor="{StaticResource TextMuted}" />
+
+        <CollectionView Grid.Row="1" x:Name="TrackList" Margin="16,8" SelectionMode="Single" SelectionChanged="OnTrackSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Track">
+                    <Grid ColumnDefinitions="56,*,Auto" Padding="4,10" ColumnSpacing="12">
+                        <Border StrokeShape="RoundRectangle 8" WidthRequest="48" HeightRequest="48" Padding="0" Stroke="Transparent">
+                            <Image Source="{Binding Art}" Aspect="AspectFill" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Text="{Binding Title}" FontSize="15" TextColor="{StaticResource TextPrimary}" LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding Artist}" FontSize="12" TextColor="{StaticResource TextMuted}" LineBreakMode="TailTruncation" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="{Binding DurationText}" FontSize="12" TextColor="{StaticResource TextMuted}" VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Palette lifted from the "Memories" login panel screenshot: near-black backdrop, dark card, periwinkle/indigo accent -->
+    <Color x:Key="PageBg">#0B0B10</Color>
+    <Color x:Key="CardBg">#15141C</Color>
+    <Color x:Key="CardBorder">#221F2C</Color>
+    <Color x:Key="FieldBg">#1C1A24</Color>
+    <Color x:Key="Accent">#7C83DB</Color>
+    <Color x:Key="AccentDark">#5E64B8</Color>
+    <Color x:Key="TextPrimary">#F5F4F8</Color>
+    <Color x:Key="TextMuted">#8D8A99</Color>
+
+</ResourceDictionary>
