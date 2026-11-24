@@ -18,16 +18,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select newest Xcode 26.x
+      - name: Select Xcode
         run: |
+          echo "Installierte Xcode-Versionen:"
           ls -d /Applications/Xcode*.app
-          XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          XCODE=$(ls -d /Applications/Xcode_26.0*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$XCODE" ]; then
+            XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          fi
           echo "Using $XCODE"
           sudo xcode-select -s "$XCODE"
+          sudo xcodebuild -license accept || true
+          sudo xcodebuild -runFirstLaunch || true
           xcodebuild -version
           xcodebuild -showsdks
-          xcrun --sdk macosx --show-sdk-path
-          xcrun -f actool
+          echo "SDK: $(xcrun --sdk macosx --show-sdk-path)"
+          echo "actool: $(xcrun -f actool)"
 
       - uses: actions/setup-dotnet@v4
         with:
